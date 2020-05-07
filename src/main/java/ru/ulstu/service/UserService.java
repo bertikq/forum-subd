@@ -57,4 +57,8 @@ public class UserService implements Crud<User> {
     public void delete(User user) {
         userRepository.delete(user);
     }
+
+    public List<User> findByStatus(String status){
+        return userRepository.findByStatus(status);
+    }
 }

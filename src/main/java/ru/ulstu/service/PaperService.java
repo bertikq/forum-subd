@@ -2,6 +2,7 @@ package ru.ulstu.service;
 
 import org.springframework.context.annotation.MBeanExportConfiguration;
 import org.springframework.data.domain.Page;
+import org.springframework.stereotype.Service;
 import ru.ulstu.model.OffsetablePageRequest;
 import ru.ulstu.model.PageableItems;
 import ru.ulstu.model.Paper;
@@ -10,6 +11,7 @@ import ru.ulstu.repository.PaperRepository;
 import java.util.List;
 import java.util.Optional;
 
+@Service
 public class PaperService implements Crud<Paper> {
 
     private final PaperRepository paperRepository;

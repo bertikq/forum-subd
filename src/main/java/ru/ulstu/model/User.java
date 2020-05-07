@@ -88,4 +88,12 @@ public class User extends BaseEntity {
     public void setThemes(Set<Theme> themes) {
         this.themes = themes;
     }
+
+    public Moderator getModerator() {
+        return moderator;
+    }
+
+    public void setModerator(Moderator moderator) {
+        this.moderator = moderator;
+    }
 }

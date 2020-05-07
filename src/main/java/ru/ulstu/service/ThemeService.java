@@ -1,6 +1,7 @@
 package ru.ulstu.service;
 
 import org.springframework.data.domain.Page;
+import org.springframework.stereotype.Service;
 import ru.ulstu.model.OffsetablePageRequest;
 import ru.ulstu.model.PageableItems;
 import ru.ulstu.model.Theme;
@@ -9,6 +10,7 @@ import ru.ulstu.repository.ThemeRepository;
 import java.util.List;
 import java.util.Optional;
 
+@Service
 public class ThemeService implements Crud<Theme> {
 
     private final ThemeRepository themeRepository;
@@ -54,5 +56,9 @@ public class ThemeService implements Crud<Theme> {
     @Override
     public void delete(Theme theme) {
         themeRepository.delete(theme);
+    }
+
+    public List<Theme> findByName(String name){
+        return themeRepository.findByName(name);
     }
 }
