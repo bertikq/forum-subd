@@ -3,6 +3,7 @@ package ru.ulstu.service;
 import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Service;
 import ru.ulstu.model.Moderator;
+import ru.ulstu.model.ModeratorStatistic;
 import ru.ulstu.model.OffsetablePageRequest;
 import ru.ulstu.model.PageableItems;
 import ru.ulstu.repository.ModeratorRepository;
@@ -57,5 +58,9 @@ public class ModeratorService implements Crud<Moderator> {
     @Override
     public void delete(Moderator moderator) {
         moderatorRepository.delete(moderator);
+    }
+
+    public List<ModeratorStatistic> getModeratorStatisticByNameTheme(String themeName){
+        return moderatorRepository.getModeratorStatisticByNameTheme(themeName);
     }
 }

@@ -58,4 +58,8 @@ public class PaperService implements Crud<Paper> {
     public void delete(Paper paper) {
         paperRepository.delete(paper);
     }
+
+    public List<Paper> findByCountSearch(int countSearch){
+        return paperRepository.findByCountSearch(countSearch);
+    }
 }

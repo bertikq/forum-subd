@@ -13,7 +13,7 @@ public class Paper extends BaseEntity {
 
     private String body;
 
-    private int CountSearch;
+    private int countSearch;
 
     @ManyToOne
     @JoinColumn(name = "theme_id", nullable = false)
@@ -24,7 +24,12 @@ public class Paper extends BaseEntity {
 
     @ManyToOne
     @JoinColumn(name = "user_id", nullable = false)
-    private User user;
+    private UserForum userForum;
+
+    @Override
+    public String toString() {
+        return name;
+    }
 
     public String getName() {
         return name;
@@ -43,11 +48,11 @@ public class Paper extends BaseEntity {
     }
 
     public int getCountSearch() {
-        return CountSearch;
+        return countSearch;
     }
 
     public void setCountSearch(int countSearch) {
-        CountSearch = countSearch;
+        this.countSearch = countSearch;
     }
 
     public Theme getTheme() {
@@ -66,11 +71,11 @@ public class Paper extends BaseEntity {
         this.comments = comments;
     }
 
-    public User getUser() {
-        return user;
+    public UserForum getUserForum() {
+        return userForum;
     }
 
-    public void setUser(User user) {
-        this.user = user;
+    public void setUserForum(UserForum userForum) {
+        this.userForum = userForum;
     }
 }

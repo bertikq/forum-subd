@@ -9,7 +9,7 @@ import javax.persistence.OneToOne;
 import java.util.Set;
 
 @Entity
-public class User extends BaseEntity {
+public class UserForum extends BaseEntity {
 
     private String name;
 
@@ -19,19 +19,22 @@ public class User extends BaseEntity {
 
     private String status;
 
-    @OneToMany(mappedBy = "user")
+    @OneToMany(mappedBy = "userForum")
     private Set<Paper> papers;
 
-    @OneToMany(mappedBy = "user")
+    @OneToMany(mappedBy = "userForum")
     private Set<Comment> comments;
 
     @OneToMany(mappedBy = "parent")
     private Set<Theme> themes;
 
     @OneToOne
-    @JoinColumn(nullable = true, name = "moderator_id")
     private Moderator moderator;
 
+    @Override
+    public String toString() {
+        return name;
+    }
 
     public String getName() {
         return name;

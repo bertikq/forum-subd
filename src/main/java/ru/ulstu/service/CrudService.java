@@ -5,9 +5,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 import ru.ulstu.model.*;
 
-import javax.swing.text.html.Option;
 import java.util.List;
-import java.util.Optional;
 
 @Service
 public class CrudService {
@@ -32,23 +30,24 @@ public class CrudService {
         this.userService = userService;
     }
 
-    public User createUser(String name, String login, String password, String status, Moderator moderator){
-        User user = new User();
-        user.setLogin(login);
-        user.setName(name);
-        user.setPassword(password);
-        if (moderator != null && moderator.getId() != null){
-            user.setModerator(moderator);
+    public UserForum createUser(String name, String login, String password, String status, Moderator moderator){
+        UserForum userForum = new UserForum();
+        userForum.setLogin(login);
+        userForum.setName(name);
+        userForum.setPassword(password);
+        userForum.setStatus(status);
+        if (moderator != null){
+            userForum.setModerator(moderator);
         }
-        return userService.create(user);
+        return userService.create(userForum);
     }
 
-    public User updateUser(User user){
-        return userService.update(user);
+    public UserForum updateUser(UserForum userForum){
+        return userService.update(userForum);
     }
 
-    public void deleteUser(User user){
-        userService.delete(user);
+    public void deleteUser(UserForum userForum){
+        userService.delete(userForum);
     }
 
     public void showAllUsers(){
@@ -56,7 +55,7 @@ public class CrudService {
         log.info(userService.findAll().toString());
     }
 
-    public Theme createTheme(String name, User parent){
+    public Theme createTheme(String name, UserForum parent){
         if (parent == null)
             return null;
 
@@ -79,14 +78,12 @@ public class CrudService {
         log.info(themeService.findAll().toString());
     }
 
-    public Paper createPaper(String name, String body, Theme themeParent, User user){
-        if (themeParent.getId() == null || user.getId() == null)
-            return null;
+    public Paper createPaper(String name, String body, Theme themeParent, UserForum userForum){
 
         Paper paper = new Paper();
         paper.setName(name);
         paper.setBody(body);
-        paper.setUser(user);
+        paper.setUserForum(userForum);
         paper.setTheme(themeParent);
 
         return paperService.create(paper);
@@ -105,11 +102,9 @@ public class CrudService {
         log.info(paperService.findAll().toString());
     }
 
-    public Moderator createModerator(User user){
-        if (user.getId() == null)
-            return null;
+    public Moderator createModerator(UserForum userForum){
         Moderator moderator = new Moderator();
-        moderator.setUser(user);
+        moderator.setUserForum(userForum);
         return  moderatorService.create(moderator);
     }
 
@@ -126,14 +121,12 @@ public class CrudService {
         log.info(moderatorService.findAll().toString());
     }
 
-    public Comment createComment(String name, String body, Paper paper, User user){
-        if (paper.getId() == null || user.getId() == null)
-            return null;
+    public Comment createComment(String name, String body, Paper paper, UserForum userForum){
         Comment comment = new Comment();
         comment.setBody(body);
         comment.setName(name);
         comment.setPaper(paper);
-        comment.setUser(user);
+        comment.setUserForum(userForum);
 
         return commentService.create(comment);
     }
@@ -162,11 +155,22 @@ public class CrudService {
     public void showFilteredRecords() {
         log.info("Filtered records:\n");
 
-        List<User> users = userService.findByStatus("user");
-        log.info(users.toString());
-
+        List<UserForum> userForums = userService.findByStatus("user");
+        log.info(userForums.toString());
         List<Theme> themes = themeService.findByName("Programs");
         log.info(themes.toString());
+        List<Paper> papers = paperService.findByCountSearch(0);
+        log.info(papers.toString());
+        List<Comment> comments = commentService.findByUser(userService.get(0));
+        log.info(comments.toString());
     }
 
+    public void showStatistic() {
+        log.info("Users statistic:\n");
+        List<UserStatistic> userStatistics = userService.getLoginUsersByThemeName("Main");
+        log.info(userStatistics.toString());
+
+        List<ModeratorStatistic> moderatorStatistics = moderatorService.getModeratorStatisticByNameTheme("Main");
+        log.info(moderatorStatistics.toString());
+    }
 }

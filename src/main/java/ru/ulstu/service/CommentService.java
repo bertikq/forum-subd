@@ -5,6 +5,7 @@ import org.springframework.stereotype.Service;
 import ru.ulstu.model.Comment;
 import ru.ulstu.model.OffsetablePageRequest;
 import ru.ulstu.model.PageableItems;
+import ru.ulstu.model.UserForum;
 import ru.ulstu.repository.CommentRepository;
 
 import java.util.List;
@@ -56,5 +57,12 @@ public class CommentService implements Crud<Comment> {
     @Override
     public void delete(Comment comment) {
         commentRepository.delete(comment);
+    }
+
+    public List<Comment> findByName(String name){
+        return commentRepository.findByName(name);
+    }
+    public List<Comment> findByUser(UserForum userForum){
+        return commentRepository.findByUserForum(userForum);
     }
 }

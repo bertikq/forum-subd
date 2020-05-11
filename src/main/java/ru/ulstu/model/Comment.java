@@ -3,7 +3,6 @@ package ru.ulstu.model;
 import javax.persistence.Entity;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
 
 @Entity
 public class Comment extends BaseEntity {
@@ -18,7 +17,7 @@ public class Comment extends BaseEntity {
 
     @ManyToOne
     @JoinColumn(name = "user_id", nullable = false)
-    private User user;
+    private UserForum userForum;
 
     public String getName() {
         return name;
@@ -44,11 +43,16 @@ public class Comment extends BaseEntity {
         this.paper = paper;
     }
 
-    public User getUser() {
-        return user;
+    public UserForum getUserForum() {
+        return userForum;
     }
 
-    public void setUser(User user) {
-        this.user = user;
+    public void setUserForum(UserForum userForum) {
+        this.userForum = userForum;
+    }
+
+    @Override
+    public String toString() {
+        return name;
     }
 }

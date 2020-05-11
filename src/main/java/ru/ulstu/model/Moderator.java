@@ -1,5 +1,7 @@
 package ru.ulstu.model;
 
+import org.hibernate.mapping.Join;
+
 import javax.persistence.*;
 import java.util.Set;
 
@@ -7,18 +9,23 @@ import java.util.Set;
 public class Moderator extends BaseEntity {
 
     @OneToOne(mappedBy = "moderator")
-    @JoinColumn(name = "user_id", nullable = false)
-    private User user;
+    @JoinColumn(name = "user_id", nullable = true)
+    private UserForum userForum;
 
     @ManyToMany
     private Set<Theme> themes;
 
-    public User getUser() {
-        return user;
+    @Override
+    public String toString() {
+        return userForum.toString();
     }
 
-    public void setUser(User user) {
-        this.user = user;
+    public UserForum getUserForum() {
+        return userForum;
+    }
+
+    public void setUserForum(UserForum userForum) {
+        this.userForum = userForum;
     }
 
     public Set<Theme> getThemes() {

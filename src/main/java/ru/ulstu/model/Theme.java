@@ -16,7 +16,12 @@ public class Theme extends BaseEntity {
 
     @ManyToOne
     @JoinColumn(name = "parent_id", nullable = false)
-    private User parent;
+    private UserForum parent;
+
+    @Override
+    public String toString() {
+        return name;
+    }
 
     public String getName() {
         return name;
@@ -42,11 +47,11 @@ public class Theme extends BaseEntity {
         this.moderators = moderators;
     }
 
-    public User getParent() {
+    public UserForum getParent() {
         return parent;
     }
 
-    public void setParent(User parent) {
+    public void setParent(UserForum parent) {
         this.parent = parent;
     }
 }
