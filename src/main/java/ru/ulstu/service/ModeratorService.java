@@ -58,4 +58,8 @@ public class ModeratorService implements Crud<Moderator> {
     public void delete(Moderator moderator) {
         moderatorRepository.delete(moderator);
     }
+
+    List<String> getNameModeratorsControllerTheme(String themeName){
+        return moderatorRepository.getNameModeratorsControllerTheme(themeName);
+    }
 }

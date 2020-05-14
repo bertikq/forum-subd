@@ -174,5 +174,8 @@ public class CrudService {
         log.info("Paper statistic:\n");
         List<PaperStatistic> paperStatistics = paperService.getPaperStatisticByCountSearch(10);
         log.info(paperStatistics.toString());
+
+        List<String> nameModerators = moderatorService.getNameModeratorsControllerTheme("Main");
+        log.info(nameModerators.toString());
     }
 }

@@ -28,6 +28,7 @@ public class Moderator extends BaseEntity {
         this.userForum = userForum;
     }
 
+    @ OrderColumn(name = "themes_index")
     public Set<Theme> getThemes() {
         return themes;
     }
