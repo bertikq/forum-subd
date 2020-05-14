@@ -1,12 +1,13 @@
 package ru.ulstu.model;
 
-import javax.persistence.Entity;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
+import org.springframework.data.jpa.repository.Query;
+import org.springframework.stereotype.Indexed;
+
+import javax.persistence.*;
 import java.util.Set;
 
 @Entity
+@Table(indexes = {@Index(columnList = "countSearch")})
 public class Paper extends BaseEntity {
 
     private String name;

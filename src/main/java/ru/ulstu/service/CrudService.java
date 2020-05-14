@@ -78,13 +78,14 @@ public class CrudService {
         log.info(themeService.findAll().toString());
     }
 
-    public Paper createPaper(String name, String body, Theme themeParent, UserForum userForum){
+    public Paper createPaper(String name, String body, Theme themeParent, UserForum userForum, int countSearch){
 
         Paper paper = new Paper();
         paper.setName(name);
         paper.setBody(body);
         paper.setUserForum(userForum);
         paper.setTheme(themeParent);
+        paper.setCountSearch(countSearch);
 
         return paperService.create(paper);
     }
@@ -170,7 +171,8 @@ public class CrudService {
         List<UserStatistic> userStatistics = userService.getLoginUsersByThemeName("Main");
         log.info(userStatistics.toString());
 
-        List<ModeratorStatistic> moderatorStatistics = moderatorService.getModeratorStatisticByNameTheme("Main");
-        log.info(moderatorStatistics.toString());
+        log.info("Paper statistic:\n");
+        List<PaperStatistic> paperStatistics = paperService.getPaperStatisticByCountSearch(10);
+        log.info(paperStatistics.toString());
     }
 }

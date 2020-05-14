@@ -61,9 +61,9 @@ public class ExampleJpaApplication {
         userForum2.setThemes(themesModerator);
         crudService.updateUser(userForum2);
 
-        Paper paper = crudService.createPaper("paperName", "paperBody", theme1, userForum1);
-        Paper paper2 = crudService.createPaper("paperName2", "paperBody2", theme2, userForum2);
-        Paper paper3 = crudService.createPaper("paperName3", "paperBody3", theme3, userForum4);
+        Paper paper = crudService.createPaper("paperName", "paperBody", theme1, userForum1, 5);
+        Paper paper2 = crudService.createPaper("paperName2", "paperBody2", theme2, userForum2, 10);
+        Paper paper3 = crudService.createPaper("paperName3", "paperBody3", theme3, userForum4, 15);
 
         for (int i = 0; i < 5; i++){
             crudService.createComment("comment" + i, "body", paper, userForum1);
